@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="/tbps/css/page.css" />
+<title>登录</title>
+<script type="text/javascript">
+	function login() {
+		document.mainform.action = '/tbps/login.shtml';
+		document.mainform.submit();
+	}
+	
+	/**
+	 * 获取验证码
+	 * @param obj
+	 * @return
+	 */
+	function changeValidateCode(obj) {
+		//获取当前的时间作为参数，无具体意义
+	    var timenow = new Date().getTime();
+	    //每次请求需要一个不同的参数，否则可能会返回同样的验证码
+	    //这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
+	    obj.src='/tbps/index/rand.action?d='+timenow;
+	    return false;
+	}
+
+	/**
+	 * 获取验证码
+	 * @param obj
+	 * @return
+	 */
+	function changeValidate(id) {
+		var timenow = new Date().getTime();
+		if(document.getElementById(id) != null) {
+			document.getElementById(id).src='/tbps/index/rand.action?d='+timenow;
+		}
+	}
+</script>
+</head>
+<body>
+	<form id="mainform" name="mainform" action="/tbps/index.shtml" method="POST">
+<table class="wwFormTable">
+		
+
+
+<link type="text/css" rel="stylesheet" href="/tbps/css/page.css" />
+<div class="title">
+	审价 / 招标 管理系统
+</div>
+<div class="bg"></div>
+
+		<table style="width:100%; height: 150px; margin-top: 80px;">
+			<tr>
+				<td align="center">
+					<table cellspacing="6" width="350px" style="border-color: none;height: 4em; padding-top: 0px;" >
+						<tr>
+							<td height="40px;" colspan="2">
+								<span class="actionmessage"></span>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								用户名：
+							</td>
+							<td align="left">
+								<input name="userLoginDto.LOGIN_ID" type="text" style="width: 150px;" maxlength="4" id="LOGIN_ID" value=""/>
+							</td>
+						</tr>
+						<tr></tr>
+						<tr>
+							<td align="right">
+								登录密码：
+							</td>
+							<td align="left">
+								<input name="userLoginDto.LOGIN_PW" style="width: 150px;" maxlength="16" type="password" id="LOGIN_PW" class="list_t_3" />
+							</td>
+						</tr>
+						<tr></tr>
+						<tr>
+							<td align="right">
+								验证码：
+							</td>
+							<td align="left" valign="bottom">
+								<input type="text" name="userLoginDto.verificationcode" style="width: 75px;" id="verificationcode" size="6" class="text" maxlength="4" value=""/>&nbsp;&nbsp; 
+								<a href="#">
+									<img title="看不清点我" id="randomImg" name="random" src="/tbps/index/rand.action" onclick="changeValidateCode(this)" width="60" height="20" border="0" align="absmiddle"/>
+								</a>
+							</td>
+						</tr>
+						<tr></tr>
+						<tr></tr>
+						<tr></tr>
+						<tr valign="middle">
+							<td colspan="2" align="center">
+								<input type="submit" class="btn" value="登录" onclick="login()"/>　　<input type="button" class="btn" value="清空" onclick="reset();"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</table></form>
+
+
+
+
+</body>
+</html>
